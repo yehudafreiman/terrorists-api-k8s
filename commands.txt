@@ -1,0 +1,2 @@
+oc apply -f .
+docker build -t yehudafreiman/threat-api:v1 .
