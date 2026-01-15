@@ -2,7 +2,6 @@ import uvicorn
 from fastapi import FastAPI, HTTPException
 from fastapi import UploadFile
 from db import terrorist_data_processing
-
 app = FastAPI()
 
 @app.post("/top-threats")
