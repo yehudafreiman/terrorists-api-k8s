@@ -2,7 +2,15 @@ import uvicorn
 from fastapi import FastAPI, HTTPException
 from fastapi import UploadFile
 from db import terrorist_data_processing
+
 app = FastAPI()
+
+MONGO_HOST = "mongo-0.mongo"
+MONGO_PORT = "27017"
+MONGO_USERNAME = "admin"
+MONGO_PASSWORD = "secretpass"
+MONGO_DB = "threat_db"
+MONGO_AUTH_SOURCE = "admin"
 
 @app.post("/top-threats")
 def load_csv(file: UploadFile):
