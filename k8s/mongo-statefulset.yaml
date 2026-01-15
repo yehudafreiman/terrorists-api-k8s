@@ -6,15 +6,12 @@ metadata:
     app: mongo
     tier: database
 spec:
-  # Links to headless Service for stable DNS
-  serviceName: postgres-headless
-  # Number of database replicas
+  serviceName: mongo
   replicas: 3
-  # Selector must match pod template labels
   selector:
     matchLabels:
       app: mongo
-  # Pod template
+      tier: database
   template:
     metadata:
       labels:
@@ -27,7 +24,6 @@ spec:
         ports:
         - containerPort: 27017
           name: mongo
-        # Environment variables for PostgreSQL configuration
         env:
         - name: MONGO_INITDB_ROOT_USERNAME
           value: "admin"
@@ -35,19 +31,15 @@ spec:
           value: "secretpass"
         - name: MONGO_INITDB_DATABASE
           value: "threat_db"
-        # Mount persistent storage
         volumeMounts:
         - name: mongo-data
           mountPath: data/db/
-  # VolumeClaimTemplates - creates one PVC per pod automatically
-  # PVC names: postgres-storage-postgres-0, postgres-storage-postgres-1
   volumeClaimTemplates:
   - metadata:
       name: mongo-data
       labels:
         app: mongo
     spec:
-      # ReadWriteOnce - only one pod can write to this volume
       accessModes: [ "ReadWriteOnce" ]
       resources:
         requests:
