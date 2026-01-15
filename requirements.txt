@@ -1,0 +1,9 @@
+fastapi
+fastapi
+pandas
+pydantic
+pymongo
+python-multipart
+uvicorn
+requests
+pandantic
